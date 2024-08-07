@@ -2,7 +2,7 @@ name: test
 
 on:
   schedule:
-    - cron: '00 06 * * *' # UTC 시간으로 설정
+    - cron: '30 23 * * *' # UTC 시간으로 설정
 
 jobs:
   deploy:
