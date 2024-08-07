@@ -29,9 +29,9 @@ function getToday() {
 
 function teamsToString(teams) {
   const { month, date } = getToday();
-  const title = `# :party_blob: :rice: ${month}월 ${date}일 밥 같이 먹어요 :rice: :party_blob: :cat_feed:`;
+  const title = `### :party_blob: :rice: ${month}월 ${date}일 밥 같이 먹어요 :rice: :party_blob: :cat_feed:`;
   const teamList = teams
-    .map((team, index) => `#### **${index + 1}조**    ➡    ${team.join('\t')}`)
+    .map((team, index) => `**${index + 1}조**    ➡    ${team.join('\t')}`)
     .join('\n');
 
   const message = `${title}\n${teamList}`;
