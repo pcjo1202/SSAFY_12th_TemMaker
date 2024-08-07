@@ -1,0 +1,30 @@
+name: test
+
+on:
+  push:
+  schedule:
+    - cron: '30 05 * * *' # UTC 시간으로 설정
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 현재 repository로 접근
+      - uses: actions/checkout@v4
+
+      # Node.js 설치
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+
+      # npm i
+      - name: dependencies 설치
+        run: npm install
+
+      # 스크립트 실행
+      - name: Run
+        env:
+          MM_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
+        run: node MMdeploy.js
