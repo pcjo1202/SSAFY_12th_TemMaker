@@ -1,7 +1,6 @@
 name: test
 
 on:
-  push:
   schedule:
     - cron: '00 06 * * *' # UTC 시간으로 설정
 
