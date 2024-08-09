@@ -2,7 +2,7 @@ name: test
 
 on:
   schedule:
-    - cron: '30 23 * * *' # UTC 시간으로 설정
+    - cron: '30 23 * * 0-4' # UTC : 일 ~ 목 오후 23시 30분 => KST : 월 ~ 금 오전 08시 30분
 
 jobs:
   deploy:
