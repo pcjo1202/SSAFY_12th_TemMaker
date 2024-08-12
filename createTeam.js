@@ -10,20 +10,19 @@ function shuffle(array = []) {
 }
 
 function createTeams(array, teamSize) {
-  let shuffledArray = shuffle(array);
+  let shuffledArray = shuffle(shuffle(shuffle(shuffle(array))));
   let teams = [];
 
   for (let i = 0; i < shuffledArray.length; i += teamSize) {
     teams.push(shuffledArray.slice(i, i + teamSize));
   }
+  console.log(teams);
 
   return teams;
 }
 
 function getToday() {
   const date = new Date();
-  console.log();
-  console.log();
   return { month: date.getMonth() + 1, date: date.getDate() };
 }
 

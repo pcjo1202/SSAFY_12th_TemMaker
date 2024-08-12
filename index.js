@@ -8,5 +8,6 @@ async function deploy() {
   await sendWebhook(message);
 }
 
+// createTeams(members, TEAM_SIZE); // 디버깅용
 // 배포 스크립트 실행
 deploy();
