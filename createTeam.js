@@ -1,11 +1,22 @@
 function shuffle(array = []) {
-  for (let i = array.length - 1; i >= 0; i--) {
-    const j = Math.round(Math.random() * i);
-    let temp;
-    temp = array[j];
-    array[j] = array[i];
-    array[i] = temp;
+  for (let i = array.length - 1; i > 0; i--) {
+    // 여러 번의 난수 생성과 다른 방식의 인덱스 선택
+    let j1 = Math.floor(Math.random() * i);
+    let j2 = Math.floor(Math.random() * i);
+    let j3 = Math.floor(Math.random() * (i + 1));
+
+    // 각 인덱스에 따른 값을 섞음
+    [array[i], array[j1]] = [array[j1], array[i]];
+    [array[i], array[j2]] = [array[j2], array[i]];
+    [array[i], array[j3]] = [array[j3], array[i]];
   }
+
+  // 최종 셔플 후 다시 한 번 랜덤하게 교환
+  for (let i = 0; i < array.length; i++) {
+    let j = Math.floor(Math.random() * array.length);
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
   return array;
 }
 
