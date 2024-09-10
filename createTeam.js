@@ -17,6 +17,12 @@ function shuffle(array = []) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 
+  // 최종 셔플 후 다시 한 번 랜덤하게 교환
+  for (let i = 0; i < array.length; i++) {
+    let j = Math.floor(Math.random() * array.length);
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
   return array;
 }
 
