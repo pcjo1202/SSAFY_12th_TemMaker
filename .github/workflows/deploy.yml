@@ -2,7 +2,7 @@ name: test
 
 on:
   schedule:
-    - cron: '30 23 * * 0-4' # UTC : 일 ~ 목 오후 23시 30분 => KST : 월 ~ 금 오전 08시 30분
+    - cron: '30 22 * * 0-4' # UTC : 일 ~ 목 오후 23시 00분 => KST : 월 ~ 금 오전 07시 30분
 
 jobs:
   deploy:
@@ -27,3 +27,13 @@ jobs:
         env:
           MM_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
         run: node index.js
+
+      # 새로 만든 파일 github에 자동 커밋
+      - name: Auto commit
+        run: |
+          git add .
+          git config --global user.email "ckdwhdev@gmail.com"
+          git config --global user.name "github-actions-jo"
+          DATE=$(date -d '+1 day' +'%Y-%m-%d')
+          git commit -m "Add ${DATE} team"
+          git push
