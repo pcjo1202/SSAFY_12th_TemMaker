@@ -30,6 +30,8 @@ jobs:
 
       # 새로 만든 파일 github에 자동 커밋
       - name: Auto commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git add .
           git config --global user.email "ckdwhdev@gmail.com"
