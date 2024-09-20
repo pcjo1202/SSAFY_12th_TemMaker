@@ -1,0 +1,41 @@
+name: weekend
+
+on:
+  schedule:
+    - cron: '30 22 * * 5-6' # UTC : 금 ~ 토 오후 23시 00분 => KST : 토 ~ 일 오전 07시 30분
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 현재 repository로 접근
+      - uses: actions/checkout@v4
+
+      # Node.js 설치
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+
+      # npm i
+      - name: dependencies 설치
+        run: npm install
+
+      # 스크립트 실행
+      - name: Run
+        env:
+          MM_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
+        run: node weekend.js
+
+      # 새로 만든 파일 github에 자동 커밋
+      - name: Auto commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add .
+          git config --global user.email "ckdwhdev@gmail.com"
+          git config --global user.name "github-actions-jo"
+          DATE=$(date -d '+1 day' +'%Y-%m-%d')
+          git commit -m "Add ${DATE} team (주말)"
+          git push
