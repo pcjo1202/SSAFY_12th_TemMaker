@@ -1,7 +1,7 @@
 name: test
 
 on:
-  push: # 테스트를 위해 추가
+  # push: # 테스트를 위해 추가
   schedule:
     - cron: '30 22 * * 0-4' # UTC : 일 ~ 목 오후 23시 00분 => KST : 월 ~ 금 오전 07시 30분
 

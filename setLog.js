@@ -53,6 +53,9 @@ function saveTeams(teams) {
   };
 
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2)); // 데이터를 파일에 저장 (2는 JSON 정렬)
+
+  console.log('저장 완료');
+  console.log(teams);
 }
 
 function loadPreviousTeams() {
