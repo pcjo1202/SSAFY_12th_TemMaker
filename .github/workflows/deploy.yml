@@ -39,4 +39,4 @@ jobs:
           git config --global user.name "github-actions-jo"
           DATE=$(date -d '+1 day' +'%Y-%m-%d')
           git commit -m "Add ${DATE} team"
-          git push
+          git push origin main
