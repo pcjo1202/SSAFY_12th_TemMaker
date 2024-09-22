@@ -1,6 +1,7 @@
 name: weekend
 
 on:
+  push:
   schedule:
     - cron: '30 22 * * 5-6' # UTC : 금 ~ 토 오후 23시 00분 => KST : 토 ~ 일 오전 07시 30분
 
@@ -38,4 +39,4 @@ jobs:
           git config --global user.name "github-actions-jo"
           DATE=$(date -d '+1 day' +'%Y-%m-%d')
           git commit -m "Add ${DATE} team (주말)"
-          git push
+          git push origin main
