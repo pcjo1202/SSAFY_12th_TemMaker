@@ -16,15 +16,43 @@ function shuffle(array = []) {
   return array;
 }
 
+const shift = (array = []) => {
+  const newArr = [];
+  // 1. 각 열번호에 따라 0, 1, 2, 3 칸 아래로 밀기
+  for (let i = 0; i < array.length; i++) {
+    let newIdx = i + (i % 4) * 4;
+
+    if (newIdx > array.length) {
+      newIdx = newIdx % array.length;
+    }
+
+    newArr[newIdx] = array[i];
+  }
+
+  // 2. 각 행에 랜덤적으로 옆으로 밀기
+  // for (let i = 0; i < array.length; i++) {
+  //
+  // }
+  return newArr;
+};
+
 function createTeams(array, teamSize) {
-  let shuffledArray = shuffle(array);
+  let shiftArray = shift(array);
+  let shuffledArray = shuffle(shiftArray);
+
+  // const aaa = new Uint32Array(2);
+  // global.crypto.getRandomValues(aaa);
+
+  // for (const num of aaa) {
+  //   console.log(num);
+  // }
 
   let teams = [];
 
   for (let i = 0; i < shuffledArray.length; i += teamSize) {
     teams.push(shuffledArray.slice(i, i + teamSize));
   }
-  saveTeams(teams);
+  // saveTeams(teams);
 
   return teams;
 }
