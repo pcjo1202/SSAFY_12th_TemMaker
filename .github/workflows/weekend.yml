@@ -1,8 +1,8 @@
 name: weekend
 
-on:
-  schedule:
-    - cron: '30 22 * * 5-6' # UTC : 금 ~ 토 오후 23시 00분 => KST : 토 ~ 일 오전 07시 30분
+# on:
+# schedule:
+# - cron: '30 22 * * 5-6' # UTC : 금 ~ 토 오후 23시 00분 => KST : 토 ~ 일 오전 07시 30분
 
 jobs:
   deploy:
