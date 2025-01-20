@@ -1,4 +1,4 @@
-const fs = require('fs');
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 function getYesterDayKey() {
   const date = new Date();
@@ -31,13 +31,13 @@ function flattenData(array) {
   return data;
 }
 
-function saveTeams(teams) {
+export function saveTeams(teams) {
   let data = {};
   const filePath = './logs/logs.json';
 
   // 기존 파일이 있으면 데이터를 불러옴
-  if (fs.existsSync(filePath)) {
-    const fileData = fs.readFileSync(filePath);
+  if (existsSync(filePath)) {
+    const fileData = readFileSync(filePath);
     data = JSON.parse(fileData);
   }
 
@@ -52,18 +52,18 @@ function saveTeams(teams) {
     data: flattenData(teams),
   };
 
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2)); // 데이터를 파일에 저장 (2는 JSON 정렬)
+  writeFileSync(filePath, JSON.stringify(data, null, 2)); // 데이터를 파일에 저장 (2는 JSON 정렬)
 
   console.log('저장 완료');
   console.log(teams);
 }
 
-function loadPreviousTeams() {
+export function loadPreviousTeams() {
   const filePath = './logs/logs.json';
   const dateKey = getYesterDayKey();
 
-  if (fs.existsSync(filePath)) {
-    const fileData = fs.readFileSync(filePath);
+  if (existsSync(filePath)) {
+    const fileData = readFileSync(filePath);
     const data = JSON.parse(fileData);
 
     if (Object.keys(data).length != 0) {
@@ -78,4 +78,3 @@ function loadPreviousTeams() {
   return null; // 파일이 없으면 null 반환
 }
 
-module.exports = { saveTeams, loadPreviousTeams };

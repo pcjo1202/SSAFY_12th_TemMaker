@@ -1,4 +1,4 @@
-const { saveTeams } = require('./setLog');
+import { saveTeams } from './setLog.js';
 
 function shuffle(array = []) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -29,30 +29,19 @@ const shift = (array = []) => {
     newArr[newIdx] = array[i];
   }
 
-  // 2. 각 행에 랜덤적으로 옆으로 밀기
-  // for (let i = 0; i < array.length; i++) {
-  //
-  // }
   return newArr;
 };
 
-function createTeams(array, teamSize) {
+export function createTeams(array, teamSize) {
   let shiftArray = shift(array);
   let shuffledArray = shuffle(shiftArray);
-
-  // const aaa = new Uint32Array(2);
-  // global.crypto.getRandomValues(aaa);
-
-  // for (const num of aaa) {
-  //   console.log(num);
-  // }
 
   let teams = [];
 
   for (let i = 0; i < shuffledArray.length; i += teamSize) {
     teams.push(shuffledArray.slice(i, i + teamSize));
   }
-  // saveTeams(teams);
+  saveTeams(teams);
 
   return teams;
 }
@@ -62,7 +51,7 @@ function getToday() {
   return { month: date.getMonth() + 1, date: date.getDate() };
 }
 
-function teamsToString(teams) {
+export function teamsToString(teams) {
   const { month, date } = getToday();
   const title = `### :party_blob: :rice: ${month}월 ${
     date + 1
@@ -74,5 +63,3 @@ function teamsToString(teams) {
   const message = `${title}\n${teamList}`;
   return message;
 }
-
-module.exports = { createTeams, teamsToString };

@@ -1,7 +1,7 @@
-const { createTeams, teamsToString } = require('./createTeam');
-const { members, TEAM_SIZE } = require('./data');
-const { sendWebhook } = require('./MMdeploy');
-const { loadPreviousTeams } = require('./setLog');
+import { createTeams, teamsToString } from './createTeam.js';
+import { members, TEAM_SIZE } from './data.js';
+import { sendWebhook } from './MMdeploy.js';
+import { loadPreviousTeams } from './setLog.js';
 
 function getPrevTeams() {
   const prevTeams = loadPreviousTeams();
@@ -20,6 +20,6 @@ async function deploy() {
   await sendWebhook(message);
 }
 
-// console.log(teamsToString(createTeams(getPrevTeams(), TEAM_SIZE))); // 디버깅용
+console.log(teamsToString(createTeams(getPrevTeams(), TEAM_SIZE))); // 디버깅용
 // 배포 스크립트 실행
-deploy();
+// deploy();

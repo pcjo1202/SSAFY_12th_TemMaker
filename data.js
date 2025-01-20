@@ -1,30 +1,6 @@
-const members = [
-  '강진주',
-  '박종하',
-  '박창조',
-  '박동민',
-  '백명규',
-  '권민채',
-  '김지민',
-  '엄예림',
-  '최준혁',
-  '배승호',
-  '최원서',
-  '김수현',
-  '이혜인',
-  '김태영',
-  '윤서희',
-  '문진수',
-  '이주현',
-  '한종우',
-  '이남재',
-  '이재백',
-  '이성준',
-  '이재홍',
-  '김수민',
-  '전종우',
-];
+import dotenv from 'dotenv';
 
-const TEAM_SIZE = 4;
+dotenv.config();
 
-module.exports = { members, TEAM_SIZE };
+export const members = process.env.MEMBERS ? JSON.parse(process.env.MEMBERS) : [];
+export const TEAM_SIZE = 4;

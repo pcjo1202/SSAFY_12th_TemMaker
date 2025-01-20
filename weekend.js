@@ -1,6 +1,6 @@
-const { createTeams } = require('./createTeam');
-const { loadPreviousTeams } = require('./setLog');
-const { members, TEAM_SIZE } = require('./data');
+import { createTeams } from './createTeam.js';
+import { loadPreviousTeams } from './setLog.js';
+import { members, TEAM_SIZE } from './data.js';
 
 function getPrevTeams() {
   const prevTeams = loadPreviousTeams();
