@@ -28,9 +28,9 @@ Repository settings -> "Secrets and variables" 이동
   - MEMBERS : 반 사람들 명단 (배열 형식으로 저장)
 
   ```javascript
-  // (주의) 해당 문자열을 JSON으로 변환하여 사용하기 때문에 홑 따옴표가 바깥으로 가도록 작성
+  // (주의) 해당 문자열을 JSON으로 변환하여 사용하기 때문에 쌍 따옴표로 감싸주어야 함
 
-  '["홍길동", "김철수", "김영희"]'
+  ["홍길동", "김철수", "김영희"]
   ```
 
 ### 2️⃣ Github Actions 설정
