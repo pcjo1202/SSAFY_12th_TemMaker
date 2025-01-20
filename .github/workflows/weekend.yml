@@ -1,8 +1,9 @@
-name: weekend
+# (로그 남기기 위한)
+name: weekend # 주말 팀 추가 
 
 # on:
-# schedule:
-# - cron: '30 22 * * 5-6' # UTC : 금 ~ 토 오후 23시 00분 => KST : 토 ~ 일 오전 07시 30분
+  # schedule:
+  # - cron: '30 22 * * 5-6' # UTC : 금 ~ 토 오후 23시 00분 => KST : 토 ~ 일 오전 07시 30분
 
 jobs:
   deploy:
@@ -25,17 +26,17 @@ jobs:
       # 스크립트 실행
       - name: Run
         env:
-          MM_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
+          MM_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }} # Mattermost Webhook URL, Github Secrets에 추가
         run: node weekend.js
 
       # 새로 만든 파일 github에 자동 커밋
       - name: Auto commit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+        run: | 
           git add .
-          git config --global user.email "ckdwhdev@gmail.com"
-          git config --global user.name "github-actions-jo"
+          git config --global user.email ${{ secrets.USER_EMAIL }}
+          git config --global user.name ${{ secrets.USER_NAME }}
           DATE=$(date -d '+1 day' +'%Y-%m-%d')
           git commit -m "Add ${DATE} team (주말)"
           git push origin main

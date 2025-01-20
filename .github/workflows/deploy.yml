@@ -1,9 +1,9 @@
-name: test
+name: Deploy
 
-# on:
-# push: # 테스트를 위해 추가
-# schedule:
-#  - cron: '30 22 * * 0-4' # UTC : 일 ~ 목 오후 23시 00분 => KST : 월 ~ 금 오전 07시 30분
+on:
+  push: # 테스트를 위해 추가
+  # schedule:
+  # - cron: '30 22 * * 0-4' # UTC : 일 ~ 목 오후 23시 00분 => KST : 월 ~ 금 오전 07시 30분
 
 jobs:
   deploy:
@@ -26,7 +26,8 @@ jobs:
       # 스크립트 실행
       - name: Run
         env:
-          MM_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
+          MM_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}   # Mattermost Webhook URL, Github Secrets에 추가
+          MEMBERS: ${{ secrets.MEMBERS }} # 팀원 목록, Github Secrets에 추가
         run: node index.js
 
       # 새로 만든 파일 github에 자동 커밋
@@ -35,8 +36,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git add .
-          git config --global user.email "ckdwhdev@gmail.com"
-          git config --global user.name "github-actions-jo"
+          git config --global user.email ${{ secrets.USER_EMAIL }}
+          git config --global user.name ${{ secrets.USER_NAME }}
           DATE=$(date -d '+1 day' +'%Y-%m-%d')
           git commit -m "Add ${DATE} team"
           git push origin main
